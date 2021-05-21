@@ -1,26 +1,49 @@
+'use strict';
+// за что отвечает if
+if (typeof module !== 'undefined') module.exports.heatmapfromdata = heatmapfromdata;
+// // module.exports.heatmapfromdata = heatmapfromdata;
 
+function heatmapfromdata(canvas) {
 
-function Heatmapfromdata(canvas) {
+    // защита от НЕПРАВИЛЬНОЙ привязки контекста 
+    if (!(this instanceof heatmapfromdata)) return new heatmapfromdata(canvas);
 
-    if (!(this instanceof Heatmapfromdata)) return new Heatmapfromdata(canvas);
-
-    canvas = typeof canvas === 'string' ? document.getElementById(canvas) : canvas;
-    this._self = this;
-    this._canvas = canvas;
+    this._canvas = typeof canvas === 'string' ? document.getElementById(canvas) : canvas;
     this._ctx = this._canvas.getContext("2d");
-    this._data = [];
-    this._grad = [],
-    this._sizeColors = 1000;
     this._width = this._canvas.width;
     this._height = this._canvas.height;
+
+    this._data = [];
+    this._grad = [],
+    this._sizeColors = 1000; // кол-ва цветов в градиенте 
 }
 
-Heatmapfromdata.prototype = {
+heatmapfromdata.prototype = {
 
-    resetAlfa: function() {
-        this._alfa = 0;
+    changeCanvas: function(width, height = 0) {
+        if (height == 0) {
+            this._canvas.width = width;
+            this._canvas.height = width;
+        } else {
+            this._canvas.width = width;
+            this._canvas.height = height;
+        }
+
+        return this;
     },
-    
+
+    sizeColors: function(sizeColors) {
+        this._sizeColors = sizeColors;
+
+        return this;
+    },
+
+    clear: function() {
+        this._data = [];
+
+        return this;
+    }, 
+
     data: function(data) {
         this._data = data;
 
@@ -34,9 +57,12 @@ Heatmapfromdata.prototype = {
     },
 
     draw: function(X) {
-        let start= new Date().getTime();
 
         this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+
+
+        
+        let start= new Date().getTime();
 
         var side = this._data.length,
             step = 1;
@@ -46,6 +72,15 @@ Heatmapfromdata.prototype = {
             for(var j = 0; j < side - 1; j++) {
                 
                 var colors = this._grad[Math.trunc(X * this._data[i][j])];
+
+                try {
+                    var asdasda = colors[0];
+                } catch {
+                    console.log("X * this._data[i][j]): ", X * this._data[i][j]);
+                    console.log("X: ", X);
+                    console.log("i: ", i, "j ", j);
+                }
+
                 var R = colors[0],
                     G = colors[1],
                     B = colors[2];
@@ -57,6 +92,8 @@ Heatmapfromdata.prototype = {
 
         let end = new Date().getTime();
         console.log(`Draw: ${end - start}ms`);
+
+        return this;
     },
 
     parseColors: function(colors) {
@@ -103,25 +140,4 @@ Heatmapfromdata.prototype = {
     },
 }
 
-
-function dataNormalization(matrix) {
-    let maxElem = 0.0;
-    for(let i = 0; i < matrix.length - 1; i++) {
-        for(let j = 0; j < matrix.length - 1; j++) {
-            maxElem = Math.max(Math.abs(matrix[i][j]), Math.abs(maxElem));
-        }
-    }
-
-    return maxElem;
-};
-
-
-function parseDataFromFile(data) {
-    return data.split("\n").map(e => {
-        return e.trim().slice(0).split(",").map(e => +e);
-    });
-};
-
-module.exports.Heatmapfromdata = Heatmapfromdata;
-module.exports.parseDataFromFile = parseDataFromFile;
-module.exports.dataNormalization = dataNormalization;
+// module.exports.heatmapfromdata = heatmapfromdata;

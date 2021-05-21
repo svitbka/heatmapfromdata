@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Heat-map</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="content">
+            <div class="wrap_iner">
+                <div class="cnt-canvas">
+                    <canvas id="canvas" width="300" height="300"></canvas>
+                </div>
+                
+                <div id="cnt-menu" class="cnt-menu" >  
+                    <div id="menu" class="menu">
+                        <ul>
+                            <li id="exportPNG" >Export as PNG</li>
+                            <li id="normalizedata">Normalize data</li>
+                            <li id="switchpallette">Switch pallette</li>
+                            <li id="information">Information</li>
+                        </ul>
+                    </div>                    
+                </div>
+
+                <div id="wrap_export" hidden> 
+                    <div id="export">
+                        <!-- <a id="216x216" href="">216x216</a>
+                        <a id="512x512" href="">512x512</a>
+                        <a id="1024x1024" href="">1024x1024</a> -->
+                        <a id="currentSize" href="">currentSize</a>
+                    </div>
+                </div>
+
+                <div id="wrap_pallette" hidden>
+                    <div id="pallette">
+                        <ul>
+                            <li id="img1" data-value="rgb(0, 0, 0)"><img src="./image/black.png" alt=""></li>
+                            <li id="img2" data-value="rgb(15, 252, 245)"><img src="./image/blue-white.png" alt=""></li>
+                            <li id="img3" data-value="rgb(0, 0, 255)"><img src="./image/blue.png" alt=""></li>
+                        </ul>  
+                        <ul>
+                            <li id="img4" data-value="rgb(0, 255, 0)"><img src="./image/green.png" alt=""></li>
+                            <li id="img5" data-value="rgb(197, 58, 240)"><img src="./image/pink.png" alt=""></li>
+                            <li id="img6" data-value="rgb(227, 102, 0)"><img src="./image/orange.png" alt=""></li>
+                        </ul> 
+                        <ul>
+                            <li id="img7" data-value="rgb(84, 0, 163)"><img src="./image/purple.png" alt=""></li>
+                            <li id="img8" data-value="rgb(255, 0, 0)"><img src="./image/red.png" alt=""></li>
+                            <li id="img9" data-value="rgb(255, 230, 0)"><img src="./image/yellow.png" alt=""></li>
+                        </ul> 
+                    </div>
+
+                    <div id="user_pallette">
+                        <p>Pallette:</p> 
+                        <li id="img3" data-value="rgb(0, 0, 255)" style="list-style: none;"><img src="./image/blue.png" alt=""></li>
+                        <li id="img4" data-value="rgb(0, 255, 0)" style="list-style: none;"><img src="./image/green.png" alt=""></li>
+                        <li id="img9" data-value="rgb(255, 230, 0)" style="list-style: none;"><img src="./image/yellow.png" alt=""></li>
+                        <li id="img8" data-value="rgb(255, 0, 0)" style="list-style: none;"><img src="./image/red.png" alt=""></li>
+                    </div>
+
+                    <div class="button_wrap">
+                        <button id="button_reset" >reset</button>
+                        <button id="button_save" data-status="false">save pallette</button>
+                    </div>
+                </div>   
+            </div>
+        </div>  
+        <div id="buttons_pict">
+            <input type="file" id="button_file">
+            <button id='button_draw'>draw</button>
+        </div>
+    </div>
+
+    <div class="wrap"> 
+        <canvas id="animation" width="500" height="500"></canvas>
+          
+        <div id="buttons_anim">
+            <input type="file" id="button_folder" webkitdirectory>
+            <button id='button_animation'>Animation</button>
+        </div>
+    </div>
+
+    
+    <script src="./heatmapfromdata.js"></script>
+    <script src="./index.js" > </script>
+</body>
+</html>
+
