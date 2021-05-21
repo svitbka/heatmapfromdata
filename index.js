@@ -137,6 +137,7 @@ document.getElementById('button_file').addEventListener('change', () => {
 
 document.getElementById('button_animation').addEventListener('click', () => {
     var colors = "";
+    i = 0;
 
     document.getElementById('user_pallette').querySelectorAll('li').forEach((e) => {
         colors += e.dataset.value;
