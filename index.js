@@ -254,5 +254,7 @@ function drawFrame() {
     if (i < el.querySelector("input[type=file]").files.length - 1) {
         i++;
         window.requestAnimationFrame(drawFrame);
+    } else {
+        alert("done");
     }
 };
