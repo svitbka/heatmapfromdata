@@ -1,4 +1,5 @@
-# Проект в который отрисовывает тепловыем процессы по данным
+# Проект который отрисовывает тепловые процессы по данным
+## Demo: https://svitbka.github.io/heatmapfromdata/
 ```
 npm i heatmapfromdata
 ```
