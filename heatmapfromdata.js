@@ -10,8 +10,6 @@ function heatmapfromdata(canvas) {
 
     this._canvas = typeof canvas === 'string' ? document.getElementById(canvas) : canvas;
     this._ctx = this._canvas.getContext("2d");
-    this._width = this._canvas.width;
-    this._height = this._canvas.height;
 
     this._data = [];
     this._grad = [],
@@ -20,14 +18,12 @@ function heatmapfromdata(canvas) {
 
 heatmapfromdata.prototype = {
 
-    changeCanvas: function(width, height = 0) {
-        if (height == 0) {
-            this._canvas.width = width;
-            this._canvas.height = width;
-        } else {
-            this._canvas.width = width;
-            this._canvas.height = height;
-        }
+    changeCanvas: function(width, height) {
+        console.log("width ", width);
+        console.log("height ", height);
+
+        this._canvas.width = width;
+        this._canvas.height = height;
 
         return this;
     },
@@ -56,29 +52,28 @@ heatmapfromdata.prototype = {
         return this;
     },
 
-    draw: function(X) {
+    draw: function(X, minElem) {
+        var start= new Date().getTime();
+        var step = 1;
+        console.log(this._data);  
 
-        this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
-
-
+        for(var i = 0; i < this._canvas.height - 1; i++) {
         
-        let start= new Date().getTime();
-
-        var side = this._data.length,
-            step = 1;
-
-        for(var i = 0; i < side - 1; i++) {
-        
-            for(var j = 0; j < side - 1; j++) {
+            for(var j = 0; j < this._canvas.width - 1; j++) {
                 
-                var colors = this._grad[Math.trunc(X * this._data[i][j])];
+                var colors = this._grad[Math.trunc(X * (this._data[i][j] + Math.abs(minElem)))];
 
                 try {
                     var asdasda = colors[0];
                 } catch {
-                    console.log("X * this._data[i][j]): ", X * this._data[i][j]);
+                    console.log("this._grad[Math.trunc(X * (this._data[i][j]) + Math.abs(minElem))]; ", this._grad[Math.trunc(X * (this._data[i][j] + Math.abs(minElem)))]);
+                    console.log("X * this._data[i][j]): ", Math.trunc(X * (this._data[i][j] + Math.abs(minElem))));
+                    console.log("this._data[i][j]: ", this._data[i][j]);
+                    console.log("Math.abs(minElem): ", Math.abs(minElem));
+                    console.log("this._sizeColors: ", this._sizeColors);
                     console.log("X: ", X);
                     console.log("i: ", i, "j ", j);
+                    console.log("this._canvas.width: ", this._canvas.width, "this._canvas.height: ", this._canvas.height);
                 }
 
                 var R = colors[0],
