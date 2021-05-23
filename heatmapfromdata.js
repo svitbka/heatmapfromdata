@@ -19,9 +19,6 @@ function heatmapfromdata(canvas) {
 heatmapfromdata.prototype = {
 
     changeCanvas: function(width, height) {
-        console.log("width ", width);
-        console.log("height ", height);
-
         this._canvas.width = width;
         this._canvas.height = height;
 
@@ -55,7 +52,6 @@ heatmapfromdata.prototype = {
     draw: function(X, minElem) {
         var start= new Date().getTime();
         var step = 1;
-        console.log(this._data);  
 
         for(var i = 0; i < this._canvas.height - 1; i++) {
         

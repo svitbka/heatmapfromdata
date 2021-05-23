@@ -31,9 +31,6 @@ document.getElementById("exportPNG").onclick = function() {
 
 
 function dataNormalization(matrix) {
-    console.log("asdasdheight: ", height);
-    console.log("asdasdwidth", width);
-
     for(var i = 0; i < matrix.length; i++) {
 
         height = Math.max(height, matrix.length);
@@ -42,10 +39,7 @@ function dataNormalization(matrix) {
             maxElem = Math.max(matrix[i][j], maxElem);
             minElem = Math.min(matrix[i][j], minElem);
         }
-    }
-    console.log("maxElem", maxElem);
-    console.log(minElem);
-    
+    }    
 
     return maxElem;
 };
@@ -174,11 +168,7 @@ document.getElementById('button_animation').addEventListener('click', () => {
     var dataColors = canvasAnim.parseColors(colors),
         gradientData = canvasAnim.linearInterpolation(dataColors);
 
-    canvasAnim.gradient(gradientData);
-
-    console.log("gradientData: ", gradientData);
-
-    
+    canvasAnim.gradient(gradientData);   
     
     window.requestAnimationFrame(drawFrame);
 });
