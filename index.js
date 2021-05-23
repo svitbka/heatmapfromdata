@@ -18,7 +18,7 @@ var canvasPict = new heatmapfromdata('canvas'),
 
 
 document.getElementById("exportPNG").onclick = function() {
-    var canvas = document.getElementById("canvas");
+    var canvas = document.getElementById("canvas"),
         dataURL = canvas.toDataURL("image/png"),
         link = document.createElement("a");
 
