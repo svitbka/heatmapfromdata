@@ -13,22 +13,64 @@ var mapDataString = [],
     maxElem = 0;
 
 
-var canvasPict = new heatmapfromdata('canvas'),
+var canvasPict = new heatmapfromdata("picture"),
     dataPict = "";
 
 
+
+
+// export image
 document.getElementById("exportPNG").onclick = function() {
-    var canvas = document.getElementById("canvas"),
-        dataURL = canvas.toDataURL("image/png"),
-        link = document.createElement("a");
+    var canvas = document.getElementById('canvas3'),
+        ctx = canvas.getContext('2d'),
+        picture = document.getElementById('picture'),
+        legend_pict = document.getElementById('legend_pict');
+    
+    canvas.width = picture.width + legend_pict.width;
+    canvas.height = picture.height;
+
+    ctx.drawImage(picture, 0, 0);
+    ctx.drawImage(legend_pict, picture.width, 0);
+
+   
+    var dataURL = canvas.toDataURL("image/png"),
+    link = document.createElement("a");
 
     document.body.appendChild(link); 
     link.href = dataURL;
-    link.download = "vizData.png";
+    link.download = "heatMap.png";
     link.click();
     document.body.removeChild(link);
 };
 
+function drawLegend(canvas, gradientData, height) {
+    console.log("height", height);
+    var legend_pict = document.getElementById(String(canvas));
+    legend_pict.height = height;
+
+    var ctx = legend_pict.getContext('2d'),
+        step = legend_pict.height / canvasPict.getColors();
+        ctx.clearRect(0, 0, legend_pict.width, legend_pict.height);
+    for(var j = canvasPict.getColors(); j > 0; j--) {
+        var colors = gradientData[canvasPict.getColors() - j],
+            R = colors[0],
+            G = colors[1],
+            B = colors[2];
+
+        ctx.fillStyle = `rgb(${R}, ${G}, ${B})`;
+        ctx.fillRect(10, j * step, 20, step);
+    }
+    var size = Math.trunc((legend_pict.height) / 40),
+        val = (maxElem + Math.abs(minElem)) / (size),
+        temp = maxElem;
+    console.log("val, ", val);
+    for(var j = 0; j <= size; j++) {
+        ctx.fillStyle = "black";
+        ctx.font = "15px Times New Roman";
+        ctx.fillText(`-   ${Math.trunc(temp)}`, 30, 15 + j * 40, 100);
+        temp -= val;
+    }
+}
 
 function dataNormalization(matrix) {
     for(var i = 0; i < matrix.length; i++) {
@@ -63,7 +105,7 @@ document.getElementById('switchpallette').addEventListener('click', function() {
     }
 });
 
-
+// User_pallette
 document.getElementById('pallette').querySelectorAll('li').forEach(e => {
     e.addEventListener('click', () => {
         var color = document.getElementById('user_pallette'),
@@ -103,8 +145,7 @@ document.getElementById('Information').addEventListener('click', () => {
     
 });
 
-// для картинки //////////////////////////////////////////////////////
-
+// canvas for picture
 document.getElementById('button_draw').addEventListener('click', () => {
     var colors = "";
     minElem = 0;
@@ -129,6 +170,9 @@ document.getElementById('button_draw').addEventListener('click', () => {
 
     canvasPict.changeCanvas(width, height);
 
+    drawLegend("legend_pict", gradientData, document.getElementById("picture").height);
+
+
     canvasPict.data(data);
     canvasPict.draw(X, minElem);
 
@@ -152,9 +196,7 @@ document.getElementById('button_file').addEventListener('change', () => {
     }
 });
 
-
-// для анимации //////////////////////////////////////////////////////
-
+// canvas for Animation
 document.getElementById('button_animation').addEventListener('click', () => {
     var colors = "";
     i = 0;
@@ -169,6 +211,8 @@ document.getElementById('button_animation').addEventListener('click', () => {
         gradientData = canvasAnim.linearInterpolation(dataColors);
 
     canvasAnim.gradient(gradientData);   
+
+    drawLegend("legend_anim", gradientData, document.getElementById("animation").height);
     
     window.requestAnimationFrame(drawFrame);
 });

@@ -4,9 +4,25 @@ body {
     background-size: cover;
 }
 
-.wrap {
-    margin-top: 50px;
+#wrap_pallette {
+    position: fixed;
     margin-left: 50px;
+    margin-top: 320px;
+}
+
+#cnt_menu {
+    position: fixed;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.wrap_legend {
+    margin-top: 50px;
+}
+
+.wrap {
+    margin-left: 400px;
+    margin-top: 20px;
     margin-bottom: 50px;
 }
 
@@ -16,28 +32,17 @@ ul {
     padding: 0;
 }
 
-.content {
-    width: 100%; 
-    max-width: 1200px;
-}
-
-.wrap_iner {
+.wrap_canvas {
     display: flex;
 }
 
-.cnt-menu {
-    margin-left: 50px;
-    width: 20%;
-    height: 400px;
-}
-
-.menu > ul > li { 
+#menu > ul > li { 
     padding: 30px;
     font-size: 16px;
     transition: font-size 0.1s linear;
 }
 
-.menu > ul > li:hover {
+#menu > ul > li:hover {
     font-size: 20px;
 }
 

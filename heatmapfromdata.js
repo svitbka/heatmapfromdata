@@ -18,6 +18,10 @@ function heatmapfromdata(canvas) {
 
 heatmapfromdata.prototype = {
 
+    getColors: function() {
+        return this._sizeColors;
+    },
+
     changeCanvas: function(width, height) {
         this._canvas.width = width;
         this._canvas.height = height;
@@ -76,8 +80,14 @@ heatmapfromdata.prototype = {
                     G = colors[1],
                     B = colors[2];
 
-                this._ctx.fillStyle = `rgb(${R}, ${G}, ${B})`;
-                this._ctx.fillRect(j, i, step, step);
+                if (minElem == this._data[i][j]) {
+                    this._ctx.fillStyle = `rgb(255, 255, 255)`;
+                    this._ctx.fillRect(j, i, step, step);
+                } else {
+                    this._ctx.fillStyle = `rgb(${R}, ${G}, ${B})`;
+                    this._ctx.fillRect(j, i, step, step);
+                }
+
             }
         }
 

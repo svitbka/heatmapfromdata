@@ -8,73 +8,88 @@
     <title>Heat-map</title>
 </head>
 <body>
-    <div class="wrap">
-        <div class="content">
-            <div class="wrap_iner">
-                <div class="cnt-canvas">
-                    <p class='pos_canvas'>draws a picture(select file)</p>
-                    <canvas id="canvas" width="500" height="500"></canvas>
-                </div>
+    <div class="wrap_menu">
+        <div id="cnt_menu">  
+            <div id="menu" >
+                <ul>
+                    <li class="select_button" id="exportPNG"><img class ="sel_bt_img" src="./image/export.png" >Export as PNG</li>
+                    <li class="select_button" id="switchpallette"><img class ="sel_bt_img" src="./image/pallete.png" >Switch pallette</li>
+                    <li class="select_button" id="Information"><img class ="sel_bt_img" src="./image/info.png" >Information</li>
+                </ul>
+            </div>                    
+        </div>
 
-                <div id="cnt-menu" class="cnt-menu" >  
-                    <div id="menu" class="menu">
-                        <ul>
-                            <li class="select_button" id="exportPNG"><img class ="sel_bt_img" src="./image/export.png" >Export as PNG</li>
-                            <li class="select_button" id="switchpallette"><img class ="sel_bt_img" src="./image/pallete.png" >Switch pallette</li>
-                            <li class="select_button" id="Information"><img class ="sel_bt_img" src="./image/info.png" >Information</li>
-                        </ul>
-                    </div>                    
-                </div>
-
-                <div id="wrap_pallette" hidden>
-                    <div id="pallette">
-                        <ul>
-                            <li id="img1" data-value="rgb(0, 0, 0)"><img src="./image/black.png"></li>
-                            <li id="img2" data-value="rgb(15, 252, 245)"><img src="./image/blue-white.png"></li>
-                            <li id="img3" data-value="rgb(0, 0, 255)"><img src="./image/blue.png"></li>
-                        </ul>  
-                        <ul>
-                            <li id="img4" data-value="rgb(0, 255, 0)"><img src="./image/green.png"></li>
-                            <li id="img5" data-value="rgb(197, 58, 240)"><img src="./image/pink.png"></li>
-                            <li id="img6" data-value="rgb(227, 102, 0)"><img src="./image/orange.png"></li>
-                        </ul> 
-                        <ul>
-                            <li id="img7" data-value="rgb(84, 0, 163)"><img src="./image/purple.png"></li>
-                            <li id="img8" data-value="rgb(255, 0, 0)"><img src="./image/red.png"></li>
-                            <li id="img9" data-value="rgb(255, 230, 0)"><img src="./image/yellow.png"></li>
-                        </ul> 
-                    </div>
-
-                    <div id="user_pallette">
-                        <p>Pallette:</p> 
-                        <li id="img3" data-value="rgb(0, 0, 255)" style="list-style: none;"><img src="./image/blue.png"></li>
-                        <li id="img4" data-value="rgb(0, 255, 0)" style="list-style: none;"><img src="./image/green.png"></li>
-                        <li id="img9" data-value="rgb(255, 230, 0)" style="list-style: none;"><img src="./image/yellow.png"></li>
-                        <li id="img8" data-value="rgb(255, 0, 0)" style="list-style: none;"><img src="./image/red.png"></li>
-                    </div>
-
-                    <div class="button_wrap">
-                        <button id="button_reset" >reset</button>
-                        <button id="button_save" data-status="false">save pallette</button>
-                    </div>
-                </div>   
+        <div id="wrap_pallette" hidden>
+            <div id="pallette">
+                <ul>
+                    <li id="img1" data-value="rgb(0, 0, 0)"><img src="./image/black.png"></li>
+                    <li id="img2" data-value="rgb(15, 252, 245)"><img src="./image/blue-white.png"></li>
+                    <li id="img3" data-value="rgb(0, 0, 255)"><img src="./image/blue.png"></li>
+                </ul>  
+                <ul>
+                    <li id="img4" data-value="rgb(0, 255, 0)"><img src="./image/green.png"></li>
+                    <li id="img5" data-value="rgb(197, 58, 240)"><img src="./image/pink.png"></li>
+                    <li id="img6" data-value="rgb(227, 102, 0)"><img src="./image/orange.png"></li>
+                </ul> 
+                <ul>
+                    <li id="img7" data-value="rgb(84, 0, 163)"><img src="./image/purple.png"></li>
+                    <li id="img8" data-value="rgb(255, 0, 0)"><img src="./image/red.png"></li>
+                    <li id="img9" data-value="rgb(255, 230, 0)"><img src="./image/yellow.png"></li>
+                </ul> 
             </div>
-        </div>  
+
+            <div id="user_pallette">
+                <p>Pallette:</p> 
+                <li id="img3" data-value="rgb(0, 0, 255)" style="list-style: none;"><img src="./image/blue.png"></li>
+                <li id="img4" data-value="rgb(0, 255, 0)" style="list-style: none;"><img src="./image/green.png"></li>
+                <li id="img9" data-value="rgb(255, 230, 0)" style="list-style: none;"><img src="./image/yellow.png"></li>
+                <li id="img8" data-value="rgb(255, 0, 0)" style="list-style: none;"><img src="./image/red.png"></li>
+            </div>
+
+            <div class="button_wrap">
+                <button id="button_reset" >reset</button>
+                <button id="button_save" data-status="false">save pallette</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- first canvas(picture) -->
+    <div class="wrap">
+        <div class="wrap_canvas">
+            <div class="wrap_iner">
+                <p class='pos_canvas'>draws a picture(select file)</p>
+                <canvas id="picture" width="500" height="500"></canvas>  
+            </div>
+            <div class="wrap_legend">
+                <canvas id="legend_pict" width="100" height="500"></canvas>
+            </div>
+        </div>
         <div id="buttons_pict">
             <input type="file" id="button_file">
             <button id='button_draw'>draw</button>
         </div>
     </div>
 
+    <!-- second canvas(picture) -->
     <div class="wrap"> 
-        <p class='pos_canvas'>rendering animation(select folder)</p>
-        <canvas id="animation" width="500" height="500"></canvas>
-          
+
+        <div class="wrap_canvas">
+            <div class="wrap_iner">
+                <p class='pos_canvas'>rendering animation(select folder)</p>
+                <canvas id="animation" width="500" height="500"></canvas> 
+            </div>
+            <div class="wrap_legend">
+                <canvas id="legend_anim" width="100" height="500"></canvas>
+            </div>
+        </div>
+
         <div id="buttons_anim">
             <input type="file" id="button_folder" webkitdirectory>
             <button id='button_animation'>Animation</button>
         </div>
     </div>
+
+    <canvas id="canvas3" hidden></canvas>
 
     
     <script src="./heatmapfromdata.js"></script>
