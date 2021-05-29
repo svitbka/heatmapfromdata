@@ -79,15 +79,9 @@ heatmapfromdata.prototype = {
                 var R = colors[0],
                     G = colors[1],
                     B = colors[2];
-
-                if (minElem == this._data[i][j]) {
-                    this._ctx.fillStyle = `rgb(255, 255, 255)`;
-                    this._ctx.fillRect(j, i, step, step);
-                } else {
-                    this._ctx.fillStyle = `rgb(${R}, ${G}, ${B})`;
-                    this._ctx.fillRect(j, i, step, step);
-                }
-
+                
+                this._ctx.fillStyle = `rgb(${R}, ${G}, ${B})`;
+                this._ctx.fillRect(j, i, step, step);
             }
         }
 
